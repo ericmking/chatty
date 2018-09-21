@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <div id="messages" data-chat-room-id="<%= @chat_room.id %>">
+      <div class="date_message">
+        woo!
+        <hr/>
+      </div>
+
+      <% @messages_by_date.each do |messages| %>
+        <div class="date_message">
+          Messages from <%= messages[0] %>
+          <hr/>
+        </div>
+
+        <%= render messages[1] %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= form_for @message, url: '#' do |f| %>
+  <div id="new_message" class="row">
+    <div class="col-md-11">
+      <div class="form-group">
+        <%= f.text_area :body, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <%= f.submit "Post", class: 'btn btn-primary btn-md' %>
+    </div>
+  </div>
+<% end %>
+

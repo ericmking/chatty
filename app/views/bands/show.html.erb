@@ -1,0 +1,12 @@
+<h2><%= @band.name %></h2>
+
+<h3>Band Members</h3>
+<ul>
+  <% @band.users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+</ul>
+
+<div>Chat Room <%= link_to @band.chat_room.name, @band.chat_room %></div>
+<div>Folder <%= link_to @band.folder.name, @band.folder %></div>
+

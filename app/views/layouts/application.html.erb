@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatty</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= action_cable_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Giggy</a>
+
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <%= link_to edit_user_registration_path, class: 'nav-link ' do %>
+                  <i class="fas fa-user"></i>
+                  <%= current_user.email %>
+                <% end %>
+              </li>
+              <% @bands.each do |band| %>
+                <li class="nav-item">
+                  <%= link_to band, class: 'nav-link ' do %>
+                    <i class="fas fa-music"></i>
+                    <%= band.name %>
+                  <% end %>
+                </li>
+              <% end %>
+              <li class="nav-item">
+                <hr/>
+              </li>
+              <li class="nav-item">
+                <%= link_to @band.chat_room, class: 'nav-link ' do %>
+                  <i class="fas fa-comments"></i>
+                  Chat
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to gigs_path, class: 'nav-link ' do %>
+                  <i class="fas fa-calendar-alt"></i>
+                  Gigs
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to uploads_path, class: 'nav-link' do %>
+                  <i class="fas fa-file"></i>
+                  Uploads
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to tasks_path, class: 'nav-link ' do %>
+                  <i class="fas fa-list-ul"></i>
+                  To-Dos
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <hr/>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_dashboards_path, class: 'nav-link ' do %>
+                  <i class="fas fa-cogs"></i>
+                  Admin
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+
+  </body>
+</html>

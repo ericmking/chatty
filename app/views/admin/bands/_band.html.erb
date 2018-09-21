@@ -1,0 +1,6 @@
+<h2><%= band.name %></h2>
+<ul>
+  <% band.users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+</ul>

@@ -1,0 +1,10 @@
+<h1>You need to set up a new band!</h1>
+
+<%= form_for @band do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "Go!", class: 'btn btn-primary' %>
+<% end %>
