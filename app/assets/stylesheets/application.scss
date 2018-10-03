@@ -15,6 +15,7 @@
  */
 
 @import "bootstrap";
+@import "tempusdominus-bootstrap-4.css";
 
 body {
   font-size: .875rem;
@@ -112,6 +113,8 @@ body {
 
 #new_message {
   width: 100%;
+  position: absolute;
+  bottom: 20px;
 }
 
 #messages {
@@ -124,4 +127,67 @@ body {
 .date_message {
   width: 100%;
   text-align: center;
+  border-top: #DDDDDD;
+  border-bottom: #DDDDDD;
+  background: #EEEEEE;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.self-text-bubble {
+  background: green;
+}
+
+.other-text-bubble {
+  background: blue;
+}
+
+.gigs {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+#message_body {
+  height: 31px;
+}
+
+
+ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0
+}
+
+.gig {
+  li {
+    div {
+      :hover {
+        color: yellow;
+      }
+    }
+  }
+}
+
+.wide {
+  width: 100%;
+}
+
+.message {
+  padding: 10px;
+}
+.message:hover {
+  background: #EEEEEE;
+}
+.gig {
+  border-bottom: 1px solid #DDDDDD;
+}
+.gig:hover {
+  background: #EEEEEE;
+}
+
+#chat {
+  height: 666px;
 }

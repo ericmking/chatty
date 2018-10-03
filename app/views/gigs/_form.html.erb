@@ -1,0 +1,271 @@
+<%= form_for @gig do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+
+  <hr/>
+
+  <h3>When?</h3>
+
+  <div class="form-group">
+    <%= f.label :start_date %>
+    <div class="input-group date" id="gig_start_datetimepicker" data-target-input="nearest">
+      <input id="gig_start_date" 
+        name="gig[start_date]" 
+        type="text" 
+        class="form-control datetimepicker-input" 
+        id="gig_start_datetimepicker" 
+        data-toggle="datetimepicker" 
+        data-target="#gig_start_datetimepicker" 
+        value="<%= @gig.start_date.strftime('%a, %b %e, %Y %I:%M %p') if @gig.start_date %>"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_date %>
+    <div class="input-group date" id="gig_end_datetimepicker" data-target-input="nearest">
+      <input id="gig_end_date" 
+        name="gig[end_date]" 
+        type="text" 
+        class="form-control datetimepicker-input" 
+        id="gig_end_datetimepicker" 
+        data-toggle="datetimepicker" 
+        data-target="#gig_end_datetimepicker"
+        value="<%= @gig.end_date.strftime('%a, %b %e, %Y %I:%M %p') if @gig.end_date %>"
+      />
+    </div>
+  </div>
+
+  <hr/>
+
+  <h3>Where?</h3>
+
+  <% 
+    if @gig.new_record? 
+      lookup_style = 'display: block;'
+      details_style = 'display: none;'
+    else
+      lookup_style = 'display: none;'
+      details_style = 'display: block;'
+    end
+  %>
+
+  <div id="locationLookup" style="<%= lookup_style %>">
+    <div class="form-group">
+      <label>Location</label>
+      <input id="autocomplete" 
+        placeholder="Search for a venue or address" 
+        onFocus="geolocate()" 
+        type="text" 
+        class="form-control">
+      </input>
+    </div>
+  </div>
+
+  <div id="locationDetails" style="<%= details_style %>">
+    <div class="form-group">
+      <%= f.label :location_venue %>
+      <%= f.text_field :location_venue, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location_address_1 %>
+      <%= f.text_field :location_address_1, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location_address_2 %>
+      <%= f.text_field :location_address_2, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location_city %>
+      <%= f.text_field :location_city, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location_state %>
+      <%= f.text_field :location_state, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location_postal_code %>
+      <%= f.text_field :location_postal_code, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location_country %>
+      <%= f.text_field :location_country, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <a href="#" onClick="resetLocation(); return false;">Reset Location</a>
+    </div>
+  </div>
+
+  <%= f.submit "Save", class: 'btn btn-success' %>
+  <% if !@gig.new_record? %>
+    <%= link_to 'Cancel', gig_path(@gig), class: 'btn btn-secondary' %>
+    <%= link_to 'Copy', copy_gig_path(@gig), class: 'btn btn-primary' %>
+    <%= link_to "Delete", gig_path(@gig), 
+        method: :delete, 
+        data: { confirm: 'Are you sure?' },
+        class: 'btn btn-danger'
+      %>
+  <% end %>
+    <%= link_to 'Cancel', gigs_path, class: 'btn btn-secondary' %>
+  <% else %>
+</div>
+<% end %>
+
+<script>
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+var placeSearch, autocomplete;
+
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+var placeValues = {
+  street_number: '',
+  route: '',
+  locality: '',
+  administrative_area_level_1: '',
+  country: '',
+  postal_code: ''
+}
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode']});
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  console.log(place);
+
+  // for (var component in componentForm) {
+  //   document.getElementById(component).value = '';
+  //   document.getElementById(component).disabled = false;
+  // }
+  // Get the fields and empty them
+  var gig_lookup = document.getElementById('locationLookup');
+  var gig_location = document.getElementById('locationDetails');
+  var gig_location_venue = document.getElementById('gig_location_venue');
+  var gig_location_address_1 = document.getElementById('gig_location_address_1');
+  var gig_location_address_2 = document.getElementById('gig_location_address_2');
+  var gig_location_city = document.getElementById('gig_location_city');
+  var gig_location_state = document.getElementById('gig_location_state');
+  var gig_location_postal_code = document.getElementById('gig_location_postal_code');
+  var gig_location_country = document.getElementById('gig_location_country');
+
+  gig_location_venue.value = '';
+  gig_location_address_1.value = '';
+  gig_location_address_2.value = '';
+  gig_location_city.value = '';
+  gig_location_state.value = '';
+  gig_location_postal_code.value = '';
+  gig_location_country.value = '';
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      console.log(addressType);
+      console.log(val);
+
+      placeValues[addressType] = val;      
+
+      // document.getElementById(addressType).value = val;
+    }
+  }
+
+  console.log(placeValues);
+  // Actually fill the form in
+  var address = placeValues['street_number'] + " " + placeValues['route'];
+
+  gig_location_venue.value = place.name;
+  gig_location_address_1.value = address;
+  gig_location_address_2.value = '';
+  gig_location_city.value = placeValues['locality'];
+  gig_location_state.value = placeValues['administrative_area_level_1'];
+  gig_location_postal_code.value = placeValues['postal_code'];
+  gig_location_country.value = placeValues['country'];
+
+  gig_lookup.style.display = "none"; // aka hide it
+  gig_location.style.display = ""; // aka show it
+}
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
+function resetLocation() {
+  // Get the fields and empty them
+  var gig_lookup = document.getElementById('locationLookup');
+  var gig_location = document.getElementById('locationDetails');
+  var gig_location_venue = document.getElementById('gig_location_venue');
+  var gig_location_address_1 = document.getElementById('gig_location_address_1');
+  var gig_location_address_2 = document.getElementById('gig_location_address_2');
+  var gig_location_city = document.getElementById('gig_location_city');
+  var gig_location_state = document.getElementById('gig_location_state');
+  var gig_location_postal_code = document.getElementById('gig_location_postal_code');
+  var gig_location_country = document.getElementById('gig_location_country');
+
+  gig_location_venue.value = '';
+  gig_location_address_1.value = '';
+  gig_location_address_2.value = '';
+  gig_location_city.value = '';
+  gig_location_state.value = '';
+  gig_location_postal_code.value = '';
+  gig_location_country.value = '';
+
+  gig_lookup.style.display = "block"; // aka show it
+  gig_location.style.display = "none"; // aka hide it
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaqmUI1Ih8Z7L7o9sg0O6DYDze6pkVzs0&libraries=places&callback=initAutocomplete" async defer></script>

@@ -1,7 +1,13 @@
-<h1>Gigs</h1>
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Gigs</h1>
+  </div>
 
-<p class="lead"><%= link_to 'New Gig', new_gig_path, class: 'btn btn-primary' %></p>
+  <div class="col-sm-6 text-right">
+    <%= link_to "Create a new Gig", new_gig_path, class: 'btn btn-primary' %>
+  </div>
+</div>
 
-<ul>
+<ul class="gigs">
   <%= render @gigs %>
 </ul>

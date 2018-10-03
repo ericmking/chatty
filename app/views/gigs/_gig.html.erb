@@ -1,5 +1,26 @@
-<div>
-  <%= gig.start_date %> /
-  <%= gig.name %> /
-  <%= gig.description %>
-</div>
+<li class='gig'>
+  <%= link_to gig do %>
+    <div class="row">
+      <div class="col-md-2">
+        image
+      </div>
+      <div class="col-md-10">        
+        <b>
+          <% if gig.start_date %>
+            <%= gig.start_date.strftime('%a, %b %e, %y') %>
+          <% else %>
+            No date yet
+          <% end %>
+          <% if gig.location_venue %>
+            at <%= gig.location_venue %>
+          <% end %>
+        </b>
+        <p>
+          <%= gig.name %>
+          <br/>
+          <%= gig.description %>
+        </p>
+      </div>      
+    </div>  
+  <% end %>
+</li>

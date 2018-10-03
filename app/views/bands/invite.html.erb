@@ -1,0 +1,16 @@
+Invite somebody!
+
+<%= form_with url: send_invitation_band_path(@band) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :message %>
+    <%= f.text_field :message, class: 'form-control' %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

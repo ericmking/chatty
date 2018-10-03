@@ -1,15 +1,13 @@
-<div class="row">
+<div id="chat" class="row">
   <div class="col-md-12">
     <div id="messages" data-chat-room-id="<%= @chat_room.id %>">
       <div class="date_message">
-        woo!
-        <hr/>
+        <%= @band.name %>
       </div>
 
       <% @messages_by_date.each do |messages| %>
         <div class="date_message">
-          Messages from <%= messages[0] %>
-          <hr/>
+          Messages from <%= messages[0].strftime('%a, %b %e, %Y') %>
         </div>
 
         <%= render messages[1] %>
@@ -26,7 +24,7 @@
       </div>
     </div>
     <div class="col-md-1">
-      <%= f.submit "Post", class: 'btn btn-primary btn-md' %>
+      <%= f.submit "Post", class: 'btn btn-primary btn-sm' %>
     </div>
   </div>
 <% end %>

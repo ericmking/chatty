@@ -4,10 +4,25 @@ Rails.application.routes.draw do
   root 'bands#index'
 
   resources :chat_rooms, only: [:new, :create, :show, :index]
+  
   resources :uploads, only: [:new, :create, :show, :index]
-  resources :bands, only: [:new, :create, :edit, :update, :show, :index]
+  
+  resources :bands, only: [:new, :create, :edit, :update, :show, :index] do
+    member do
+      get 'join'
+      get 'invite'
+      post 'send_invitation'
+    end
+  end
+
   resources :folders, only: [:new, :create, :edit, :update, :show, :index]
-  resources :gigs, only: [:new, :create, :edit, :update, :show, :index]
+  
+  resources :gigs do
+    member do
+      get 'copy'
+    end
+  end
+  
   resources :tasks, only: [:new, :create, :edit, :update, :show, :index]
 
   namespace :admin do

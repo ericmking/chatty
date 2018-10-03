@@ -35,9 +35,14 @@ gem 'redis', '~> 4.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'devise'
+gem 'devise', '~> 4.4'
+gem 'devise_invitable', '~> 1.7.0'
+
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
+
+gem 'momentjs-rails'
+gem 'bootstrap4-datetime-picker-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,6 +51,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener'
+  
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'

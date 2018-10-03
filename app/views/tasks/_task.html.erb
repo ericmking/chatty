@@ -1,1 +1,13 @@
-<div><%= task.name %></div>
+<li class='gig'>
+  <hr/>
+  <%= link_to task do %>
+    <div class="row">
+      <div class="col-md-2">
+        <%= task.responsibile_user.id if task.responsibile_user %>
+      </div>
+      <div class="col-md-10">        
+      <%= task.description %>
+      </div>      
+    </div>  
+  <% end %>
+</li>

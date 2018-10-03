@@ -1,4 +1,6 @@
 class GigsController < ApplicationController
+  before_action :get_gig, only: [:show, :edit, :update, :delete, :copy]
+
   def index
     @gigs = @band.gigs.all.order(:start_date)
   end
@@ -14,12 +16,37 @@ class GigsController < ApplicationController
     if @gig.save
       redirect_to gigs_path
     else
-      puts @gig.errors.inspect
       render 'new'
     end
   end
 
+  def edit
+  end
+
+  def update
+    @gig.update_attributes(gig_params)
+
+    if @gig.save
+      redirect_to gigs_path
+    else
+      render 'edit'
+    end
+  end
+
+  def copy
+    copied_gig = @gig.dup
+    if copied_gig.save
+      redirect_to copied_gig
+    else
+      render 'show'
+    end
+  end
+
   private
+
+  def get_gig
+    @gig = Gig.find_by(id: params[:id])
+  end
 
   def gig_params
     params.require(:gig).permit(

@@ -20,4 +20,23 @@ class Band < ApplicationRecord
     self.folder = folder
     self.save!
   end
+
+  def add_user_to_band(user_id)
+    user = User.find_by(id: user_id)
+    if !has_member?(user.id)
+      BandMember.create!(
+        band: @band,
+        user_id: user
+      )
+    end
+  end
+
+  def has_member?(user_id)
+    band_members = self.users.where(id: user_id)
+    if band_members.size > 0 then
+      true
+    else
+      false
+    end
+  end
 end

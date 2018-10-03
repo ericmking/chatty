@@ -8,8 +8,9 @@ class ChatRoomsChannel < ApplicationCable::Channel
   end
 
   def send_message(data)
-    puts data
-    puts "frigg!"
-    current_user.messages.create!(body: data['message'], chat_room_id: data['chat_room_id'])
+    body = data['message']
+    chat_room_id = data['chat_room_id']
+
+    Message.create_message_with_reminders(body, chat_room_id, current_user.id)
   end
 end

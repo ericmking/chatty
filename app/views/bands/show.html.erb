@@ -1,12 +1,20 @@
-<h2><%= @band.name %></h2>
+<h1><%= @band.name %></h1>
 
 <h3>Band Members</h3>
-<ul>
-  <% @band.users.each do |user| %>
-    <li><%= user.email %></li>
+<ul class="band-members">
+  <% @band.users.uniq.each do |user| %>
+    <li>
+      <% if user == current_user %>
+        <%= link_to user.email, edit_registration_path(user) %> (you!)
+      <% else %>
+        <%= user.email %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
+<%= link_to "Invite a new member", invite_band_path(@band) %>
 
-<div>Chat Room <%= link_to @band.chat_room.name, @band.chat_room %></div>
-<div>Folder <%= link_to @band.folder.name, @band.folder %></div>
+<h3>Activity</h3>
+
+
 

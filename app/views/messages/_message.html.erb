@@ -1,16 +1,22 @@
-<div class="row">
+
+
+<div class="row message">
   <div class="col-md-2">
-    <span class="text-muted">
-      <%= message.user.email %>
-    </span>
-  </div>
-  <div class="col-md-8">
-    <p>
-      <%= message.body %>
-      <br>
-      <span class="text-muted">
-         at <%= message.timestamp %>
-      </span>
-    </p>
+
+  </div>    
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-6">
+        <span class="text-muted"><%= message.user.email %></span>
+      </div>
+      <div class="col-md-6 text-right">
+        <span class="text-muted"><%= message.created_at.strftime('%I:%M %p') %></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= raw message.body %>
+      </div>
+    </div>
   </div>
 </div>

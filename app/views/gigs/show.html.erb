@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>
+      <%= link_to 'Gigs', gigs_path %> /
+      <% if @gig.start_date %>
+        <%= @gig.start_date.strftime('%a, %b %e') %>
+      <% else %>
+        No date yet
+      <% end %>
+      <% if @gig.location_venue %>
+        at <%= @gig.location_venue %>
+      <% end %>
+    </h1>
+  </div>    
+</div> 
+
+<div class="row">
+  <div class="col-md-2">
+    image
+  </div>
+  <div class="col-md-10">        
+    <b>
+      <% if @gig.start_date %>
+        <%= @gig.start_date.strftime('%a, %b %e, %y') %>
+      <% else %>
+        No date yet
+      <% end %>
+      <% if @gig.location_venue %>
+        at <%= @gig.location_venue %>
+      <% end %>
+    </b>
+    <p>
+      <%= @gig.name %>
+      <br/>
+      <%= @gig.description %>
+    </p>
+  </div>      
+</div>  
+
+<% if @start_date || @end_date %>
+<h3>When?</h3>
+<% end %>
+<% if @start_date %>
+  <div class="col-md-12">
+    Starts at <%= @gig.start_date.strftime('%a, %b %e, %Y %I:%M %p') %>
+  </div>
+<% end %>
+
+<% if @end_date %>
+  <div class="col-md-12">
+    Ends at <%= @gig.end_date.strftime('%a, %b %e, %Y %I:%M %p') %>
+  </div>
+<% end %>
+
+<h3>Where?</h3>
+<div class="col-md-12">
+  <%= @gig.location_venue %> /
+  <%= @gig.location_address_1 %> /
+  <%= @gig.location_address_2 %> /
+  <%= @gig.location_city %> /
+  <%= @gig.location_state %> /
+  <%= @gig.location_postal_code %> /
+  <%= @gig.location_country %> /
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1><%= link_to 'Edit', edit_gig_path(@gig), class: 'wide btn btn-primary' %></h1>
+  </div> 
+  <div class="col-sm-6">
+    <h1><%= link_to 'Delete', gig_path(@gig), class: 'wide btn btn-danger' %></h1>
+  </div>   
+</div>

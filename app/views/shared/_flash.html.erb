@@ -1,0 +1,16 @@
+<% flash.each do |name, message| %>
+  <%
+    if name == 'alert'
+      result = Flash::BAD_TERMS.sample
+    elsif name == 'notice'
+      result = Flash::GOOD_TERMS.sample
+    end
+  %>
+
+  <div class="alert alert-<%= Flash::NAME_TO_CLASS[name] %>" role="alert"> 
+    <p class="mb-0">
+      <b><%= result %>.</b>
+      <%= message %>
+    </p>
+  </div>
+<% end %>
