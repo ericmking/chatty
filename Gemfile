@@ -38,11 +38,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '~> 4.4'
 gem 'devise_invitable', '~> 1.7.0'
 
-gem 'bootstrap', '~> 4.0.0'
+# gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 
 gem 'momentjs-rails'
 gem 'bootstrap4-datetime-picker-rails'
+gem "bulma-rails", "~> 0.7.2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

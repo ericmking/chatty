@@ -14,180 +14,69 @@
  *= require_self
  */
 
-@import "bootstrap";
-@import "tempusdominus-bootstrap-4.css";
+ @import "bulma";
+
+ html,
+body,
+.page {
+  height: 100vh; /* needed for proper layout */
+}
 
 body {
-  font-size: .875rem;
+  overflow: hidden;
 }
 
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
+p {
+  margin-bottom: 1em;
 }
 
-/*
- * Sidebar
- */
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+.page {
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar-sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 48px; /* Height of navbar */
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+.page-header {
+  flex: 0 0 auto;
+  background-color: #dcdcdc;
+  border-bottom: 1px solid #cbcbcb;
 }
 
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
+.page-content {
+  flex: 1 1 auto;
+  position: relative;/* need this to position inner content */
+  overflow-y: auto;
 }
 
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
+.page-footer {
+  flex: 0 0 auto;
+  background-color: #dcdcdc;
+  border-top: 1px solid #cbcbcb;
 }
 
-.sidebar .nav-link.active {
-  color: #007bff;
+ #nav-menu {
+  margin-bottom: 0px;
 }
 
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
+.hero-body {
+  padding: 14px;
 }
 
-.sidebar-heading {
-  font-size: .75rem;
-  text-transform: uppercase;
+
+
+.dropzone {
+  border: 2px dashed red;
+  cursor: pointer;
 }
 
-/*
- * Navbar
- */
-
-.navbar-brand {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: 1rem;
-  background-color: rgba(0, 0, 0, .25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-}
-
-.navbar .form-control {
-  padding: .75rem 1rem;
-  border-width: 0;
-  border-radius: 0;
-}
-
-.form-control-dark {
-  color: #fff;
-  background-color: rgba(255, 255, 255, .1);
-  border-color: rgba(255, 255, 255, .1);
-}
-
-.form-control-dark:focus {
-  border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-}
-
-/*
- * Utilities
- */
-
-.border-top { border-top: 1px solid #e5e5e5; }
-.border-bottom { border-bottom: 1px solid #e5e5e5; }
-
-#new_message {
+.table {
   width: 100%;
-  position: absolute;
-  bottom: 20px;
-}
-
-#messages {
-  width: 100%;
-  height: calc(100vh - 300px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.date_message {
-  width: 100%;
-  text-align: center;
-  border-top: #DDDDDD;
-  border-bottom: #DDDDDD;
-  background: #EEEEEE;
-  padding: 10px;
-  font-weight: bold;
-}
-
-.self-text-bubble {
-  background: green;
-}
-
-.other-text-bubble {
-  background: blue;
-}
-
-.gigs {
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-}
-
-#message_body {
-  height: 31px;
-}
-
-
-ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0
-}
-
-.gig {
-  li {
-    div {
-      :hover {
-        color: yellow;
-      }
-    }
-  }
-}
-
-.wide {
-  width: 100%;
-}
-
-.message {
-  padding: 10px;
-}
-.message:hover {
-  background: #EEEEEE;
-}
-.gig {
-  border-bottom: 1px solid #DDDDDD;
-}
-.gig:hover {
-  background: #EEEEEE;
 }
 
 #chat {
-  height: 666px;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+#new_message {
+  padding: 5px;
 }

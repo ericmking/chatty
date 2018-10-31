@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chatty</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,94 +12,66 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  </head>
+  </head>  
 
   <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Giggy</a>
+    <div class="page">
+      <div class="page-header">
+        <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+              Giggable Planet
+            </a>
 
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
-        </li>
-      </ul>
-    </nav>    
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
 
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <%= link_to edit_user_registration_path, class: 'nav-link ' do %>
-                  <i class="fas fa-user"></i>
-                  <%= current_user.email %>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <hr/>
-              </li>
-              <% @bands.each do |band| %>
-                <% 
-                  active_band = ''
-                  if @band == band 
-                    active_band = 'active' # Active link class name 
-                  end
-                %>
-                <li class="nav-item">
-                  <%= link_to band, class: "nav-link #{active_band}" do %>
-                    <i class="fas fa-music"></i>   
-                    <%= band.name %>   
-                  <% end %>
-                </li>
-              <% end %>
-              <li class="nav-item">
-                <hr/>
-              </li>
-              <li class="nav-item">
-                <%= link_to @band.chat_room, class: 'nav-link ' do %>
-                  <i class="fas fa-comments"></i>
-                  Chat
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to gigs_path, class: 'nav-link ' do %>
-                  <i class="fas fa-calendar-alt"></i>
-                  Gigs
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to uploads_path, class: 'nav-link' do %>
-                  <i class="fas fa-file"></i>
-                  Uploads
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to tasks_path, class: 'nav-link ' do %>
-                  <i class="fas fa-list-ul"></i>
-                  Tasks
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <hr/>
-              </li>
-              <li class="nav-item">
-                <%= link_to admin_dashboards_path, class: 'nav-link ' do %>
-                  <i class="fas fa-cogs"></i>
-                  Admin
-                <% end %>
-              </li>
-            </ul>
+          <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  Bleeding Out
+                </a>
+
+                <div class="navbar-dropdown">
+                  <a class="navbar-item">
+                    Bleeding Out
+                  </a>
+                  <a class="navbar-item">
+                    Black Iron Prison
+                  </a>
+                  <a class="navbar-item">
+                    Ilmestys
+                  </a>              
+                </div>
+              </div>
+            </div>
+
+            <div class="navbar-end">
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  primitive.tools@gmail.com
+                </a>
+                <a class="navbar-item">
+                  Bleeding Out
+                </a>
+                <a class="navbar-item">
+                  Black Iron Prison
+                </a>
+                <a class="navbar-item">
+                  Ilmestys
+                </a>              
+              </div>
+            </div>
           </div>
         </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-          <%= render 'shared/flash' %>          
-
-          <%= yield %>
-        </main>
       </div>
-    </div>
 
+      <%= yield %>      
+    </div>    
   </body>
 </html>

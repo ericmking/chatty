@@ -1,31 +1,33 @@
-<div id="chat" class="row">
-  <div class="col-md-12">
-    <div id="messages" data-chat-room-id="<%= @chat_room.id %>">
+<div class="page-content">  
+  <div id="messages" data-chat-room-id="<%= @chat_room.id %>">
+    <div class="date_message">
+      <%= @band.name %>
+    </div>
+
+    <% @messages_by_date.each do |messages| %>
       <div class="date_message">
-        <%= @band.name %>
+        Messages from <%= messages[0].strftime('%a, %b %e, %Y') %>
       </div>
 
-      <% @messages_by_date.each do |messages| %>
-        <div class="date_message">
-          Messages from <%= messages[0].strftime('%a, %b %e, %Y') %>
-        </div>
-
-        <%= render messages[1] %>
-      <% end %>
-    </div>
-  </div>
+      <%= render messages[1] %>
+    <% end %>
+  </div>  
 </div>
 
-<%= form_for @message, url: '#' do |f| %>
-  <div id="new_message" class="row">
-    <div class="col-md-11">
-      <div class="form-group">
-        <%= f.text_area :body, class: 'form-control' %>
+<div class="page-footer">
+  <div id="new_message" class="container" style="padding: 5px;">
+    <%= form_for @message, url: '#' do |f| %>  
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <div class="is-fullwidth">
+            <%= f.text_field :body, class: 'input is-primary' %>
+          </div>
+        </div>
+        <div class="control">
+          <%= f.submit "Send", class: 'button is-primary' %>
+        </div>
       </div>
-    </div>
-    <div class="col-md-1">
-      <%= f.submit "Post", class: 'btn btn-primary btn-sm' %>
-    </div>
+    <% end %>
   </div>
-<% end %>
+</div>
 
